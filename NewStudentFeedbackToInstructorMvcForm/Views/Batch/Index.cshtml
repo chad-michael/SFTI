@@ -1,0 +1,98 @@
+﻿@model PagedList.IPagedList<NewStudentFeedbackToInstructorMvcForm.Models.View_BatchSearch>
+@using PagedList.Mvc;
+@using NewStudentFeedbackToInstructorMvcForm.Models;
+
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<p></p>
+
+<div class="row">
+    <div class="column" row id="content">
+        <h3>Selected Items</h3>
+        <p>
+            <strong>Please note: Use of this application is subject to the <a target="_blank" href="http://www3.delta.edu/AUG.asp">Delta College Acceptable Use Guidelines</a>.</strong>
+        </p>
+
+        @Html.CheckBox("EmailOutput")
+        <label for="EmailOutput" class="checkbox">Email Output</label><br />
+
+        <input type="submit" value="SFTI - Single Page" class="button" id="btnSinglePage" />
+        <input type="submit" value="SFTI - Multi Page" class="button" id="btnMultiPage" />
+        <input type="submit" value="SFTI - Excel" class="button" id="btnExcel" />
+        <input type="submit" value="SFTI - Raw" class="button" id="btnRaw" />
+        <input type="submit" value="SFTI - Recap" class="button" id="btnRecap" />
+        <br />
+        <br />
+        <input type="submit" value="Add Checked to Selection" class="button" id="btnAddChecked" /><br />
+        <div>
+            <input type="checkbox" id="checkall" />
+            <label for="checkall" class="checkbox">Check All</label>
+        </div>
+
+        <h3>Search Results</h3>
+        <table id="tblSearchResults" class="responsive table large-12">
+            <tr>
+                <th style="text-align:center">
+                    @Html.ActionLink("Batch ID", "Index",
+            new { orderBy = "batchid", searchField = ViewBag.SearchField, searchString = ViewBag.SearchString },
+            new { @class = ("batchid" == ViewBag.OrderBy ? "selected" : "") })
+                </th>
+                <th style="text-align:center">
+                    @Html.ActionLink("Date Scanned", "Index",
+            new { orderBy = "datescanned", searchField = ViewBag.SearchField, searchString = ViewBag.SearchString },
+            new { @class = ("datescanned" == ViewBag.OrderBy ? "selected" : "") })
+                </th>
+
+                <th style="text-align:center">
+                    @Html.ActionLink("Faculty ID", "Index",
+            new { orderBy = "facultyid", searchField = ViewBag.SearchField, searchString = ViewBag.SearchString },
+            new { @class = ("facultyid" == ViewBag.OrderBy ? "selected" : "") })
+                </th>
+
+                <th style="text-align:center">
+                    @Html.ActionLink("Faculty Name", "Index",
+            new { orderBy = "facultyname", searchField = ViewBag.SearchField, searchString = ViewBag.SearchString },
+            new { @class = ("facultyname" == ViewBag.OrderBy ? "selected" : "") })
+                </th>
+
+                <th style="text-align:center">
+                    @Html.ActionLink("Term", "Index",
+            new { orderBy = "term", searchField = ViewBag.SearchField, searchString = ViewBag.SearchString },
+            new { @class = ("term" == ViewBag.OrderBy ? "selected" : "") })
+                </th>
+
+                <th style="text-align:center">Add to Selected</th>
+                <th>&nbsp;</th>
+
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td style="text-align:center">@Html.DisplayFor(modelItem => item.BatchID)</td>
+                    <td style="text-align:center">@Html.DisplayFor(modelItem => item.DateScanned)</td>
+                    <td style="text-align:center">@Html.DisplayFor(modelItem => item.CSF_FACULTY)</td>
+                    <td style="text-align:center">@Html.DisplayFor(modelItem => item.FACULTY_NAME)</td>
+                    <td style="text-align:center">@Html.DisplayFor(modelItem => item.Term)</td>
+                    <td style="text-align:center" id="checkboxes">@Html.CheckBox("checked")</td>
+                    <td style="text-align:center">@Html.ActionLink("Remove Item From Database", "Delete")</td>
+                </tr>
+            }
+        </table>
+
+        <br />
+
+        @*<asp:Button runat="server" ID="btnAddCheckedBottom" Text="Add Checked to Selection" OnClick="btnAddChecked_Click" />*@
+        <input type="submit" value="Add Checked to Selection" class="button" id="btnAddCheckedBottom" />
+        <br />
+    </div>
+</div>
+
+<br />
+<br />
+
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, orderBy = ViewBag.OrderBy, searchField = ViewBag.SearchField, searchString = ViewBag.SearchString }))

@@ -1,31 +1,221 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@model NewStudentFeedbackToInstructorMvcForm.Models.View_BatchSearch
+
+@using PagedList.Mvc;
+
+@{
+    ViewData["Title"] = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+<style type="text/css">
+    .gridFormat {
+        padding-left: 40px;
+    }
+
+    .modelBackground {
+        background-color: Gray;
+        filter: alpha(opacity=70);
+        opacity: 0.7;
+    }
+
+    .modalPopup {
+        text-align: left;
+        background-color: #FFFFDD;
+        border: 3px;
+        border-style: solid;
+        border-color: Gray;
+        padding: 3px;
+        width: 250px;
+    }
+
+    .ms-propertysheet th {
+        color: White;
+        font-weight: bold;
+        text-align: left;
+    }
+</style>
+
+<p></p>
 
 <div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+    <div class="column" row id="content">
+
+        <h2 class="text-center">Student Feedback To Instructor Form</h2>
+
+        <p></p>
+
+        <!-- Panel Start -->
+       <div class="panel panel-primary">
+
+           <!-- Panel Header -->
+            <div class="panel-heading">
+                <h3>Basic Overview</h3>
+            </div>
+            <div class="panel-body">
+
+                <!-- Panel Content -->
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        Fill out the fields you wish to search on. Empty fields will be ignored.
+                    </li>
+                    <li class="list-group-item">
+                        Go down to search results and select the checkboxes next to courses you wish to
+                        add, then click Add Checked to Selection.
+                    </li>
+                    <li class="list-group-item">
+                        If additional courses are desired, change search results and Search again. Selected
+                        items will be retained.
+                    </li>
+                    <li class="list-group-item">
+                        Add desired search results to selected and repeat until all desired courses are
+                        present.
+                    </li>
+                    <li class="list-group-item">
+                        Then click on the the buttons above and below selected items. They will output the
+                        information in the desired format.
+                    </li>
+                </ul>
+
+            </div>
+           <!-- Panel Footer -->
+            <div class="panel-footer">
+                    To access the student feedback forms in the older (blue) format, please to to the following link: 
+                    <a href="https://deltanet.delta.edu/myintranet/oit/scantools/LookUp_v2.aspx">https://deltanet.delta.edu/myintranet/oit/scantools/LookUp_v2.aspx</a>
+            </div>
+        </div> <!-- Panel End -->
+        
+            @using (Html.BeginForm("Index", "Home"))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="cmxform">
+                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <fieldset>
+                        <table class="responsive">
+                            <tr>
+                                <td>
+                                    <div class="form-group">
+                                        @Html.Label("facultyId", "Faculty ID", htmlAttributes: new { @class = "control-label" })
+                                        <div class="col-md-10">
+                                            @Html.TextBoxFor(model => model.CSF_FACULTY, new { id = "facultyId", @placeholder = "Faculty ID" })
+                                            <span asp-validation-for="CSF_FACULTY" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        @Html.Label("firstName", "Faculty First Name", htmlAttributes: new { @class = "control-label" })
+                                        <div class="col-md-10">
+                                            @Html.TextBoxFor(model => model.FIRST_NAME, new { id = "firstName", @placeholder = "First Name" })
+                                            <span asp-validation-for="FIRST_NAME" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        @Html.Label("lastName", "Faculty Last Name", htmlAttributes: new { @class = "control-label" })
+                                        <div class="col-md-10">
+                                            @Html.TextBoxFor(model => model.LAST_NAME, new { id = "lastName", @placeholder = "Last Name" })
+                                            <span asp-validation-for="LAST_NAME" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                        <table class="responsive">
+                            <tr>
+                                <td>
+                                    <div class="form-group">
+                                        @Html.Label("department", "Department", htmlAttributes: new { @class = "control-label" })
+                                        <div class="col-md-10">
+                                            @Html.TextBoxFor(model => model.DEPARTMENT_1, new { id = "department", @placeholder = "Department" })
+                                            <span asp-validation-for="DEPARTMENT_1" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        @Html.Label("courseNumber", "Course Number", htmlAttributes: new { @class = "control-label" })
+                                        <div class="col-md-10">
+                                            @Html.TextBoxFor(model => model.COURSE_SECTIONS_ID, new { id = "courseNumber", @placeholder = "Course Number" })
+                                            <span asp-validation-for="COURSE_SECTIONS_ID" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        @Html.Label("sectionNumber", "Section Number", htmlAttributes: new { @class = "control-label" })
+                                        <div class="col-md-10">
+                                            @Html.TextBoxFor(model => model.SEC_NO, new { id = "sectionNumber", @placeholder = "Section Number" })
+                                            <span asp-validation-for="SEC_NO" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        @Html.Label("Term", "Term", htmlAttributes: new { @class = "control-label" })
+                                        <div class="col-md-10">
+                                            @Html.DropDownList("Term", null, htmlAttributes: new { @class = "form-control" })
+                                            <span asp-validation-for="Term" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                        <table class="responsive">
+                            <tr>
+                                <td>
+                                    <div class="form-group">
+                                        @Html.Label("startDate", "Start Date", htmlAttributes: new { @class = "control-label" })
+                                        <div class="col-md-10">
+                                            @Html.TextBoxFor(model => model.SEC_START_DATE, new { id = "startDate", @placeholder = "Start Date", @class = "form-control fdatepicker" })
+                                            <span asp-validation-for="SEC_START_DATE" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        @Html.Label("endDate", "End Date", htmlAttributes: new { @class = "control-label" })
+                                        <div class="col-md-10">
+                                            @Html.TextBoxFor(model => model.STATUS_DATE, new { id = "endDate", @placeholder = "End Date", @class = "form-control fdatepicker" })
+                                            <span asp-validation-for="STATUS_DATE" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        @Html.Label("endDate", "End Date", htmlAttributes: new { @class = "control-label" })
+                                        <div class="col-md-10">
+                                            @Html.TextBoxFor(model => model.DateScanned, new { id = "dateScanned", @placeholder = "Date Scanned", @class = "form-control fdatepicker" })
+                                            <span asp-validation-for="DateScanned" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                        <table class="responsive">
+                            <tr>
+                                <td>
+                                    <div class="search-form-group">
+                                        <input type="submit" class="button" value="Search" />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        @Html.Label("SearchResults", "Number of Results to Display", htmlAttributes: new { @class = "form-control" })
+                                        <div class="col-md-10">
+                                            @Html.DropDownList("SearchResults", null, htmlAttributes: new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </fieldset>
+                </div>
+            }
     </div>
 </div>
+
+<p></p>
+
+

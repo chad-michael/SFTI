@@ -1,0 +1,30 @@
+﻿@model NewStudentFeedbackToInstructorMvcForm.Models.BatchSearch
+
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Search</h2>
+
+@using (Html.BeginForm("index", "products", FormMethod.Get))
+{
+    <div class="row">
+
+        <div class="form-horizontal">
+            <div class="col-lg-3">
+                @Html.TextBoxFor(m => m.FACULTYID, new { @class = "form-control", @placeholder = "Faculty ID" })
+            </div>
+
+            </div>
+            <div class="col-lg-3">
+                <button type="submit" class="btn btn-success">
+                    <span class="glyphicon glyphicon-search"></span>
+                </button>
+
+                <a class="btn btn-success pull-right" data-modal="" href="/Products/Create" id="btnCreate">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </a>
+            </div>
+        </div>
+}

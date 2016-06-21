@@ -1,0 +1,129 @@
+﻿@model NewStudentFeedbackToInstructorMvcForm.Models.View_BatchSearch
+
+<div id="SearchForm">
+    <form asp-controller="Home" asp-action="Index" class="form" role="form">
+        <div asp-validation-summary="ValidationSummary.All" class="text-danger"></div>
+
+        <fieldset>
+            <table class="responsive">
+                <tr>
+                    <td>
+                        <div class="search-form-group">
+                            @Html.Label("facultyId", "Faculty ID", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(model => model.CSF_FACULTY, new { id = "facultyId", @placeholder = "Faculty ID" })
+                                <span asp-validation-for="CSF_FACULTY" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="search-form-group">
+                            @Html.Label("firstName", "Faculty First Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(model => model.FIRST_NAME, new { id = "firstName", @placeholder = "First Name" })
+                                <span asp-validation-for="FIRST_NAME" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="search-form-group">
+                            @Html.Label("lastName", "Faculty Last Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(model => model.LAST_NAME, new { id = "lastName", @placeholder = "Last Name" })
+                                <span asp-validation-for="LAST_NAME" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <table class="responsive">
+                <tr>
+                    <td>
+                        <div class="search-form-group">
+                            @Html.Label("department", "Department", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(model => model.DEPARTMENT_1, new { id = "department", @placeholder = "Department" })
+                                <span asp-validation-for="DEPARTMENT_1" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="search-form-group">
+                            @Html.Label("courseNumber", "Course Number", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(model => model.COURSE_SECTIONS_ID, new { id = "courseNumber", @placeholder = "Course Number" })
+                                <span asp-validation-for="COURSE_SECTIONS_ID" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="search-form-group">
+                            @Html.Label("sectionNumber", "Section Number", htmlAttributes: new { @class = "control-label" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(model => model.SEC_NO, new { id = "sectionNumber", @placeholder = "Section Number" })
+                                <span asp-validation-for="SEC_NO" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="search-form-group">
+                            @Html.Label("Term", "Term", htmlAttributes: new { @class = "control-label" })
+                            <div class="col-md-10">
+                                @Html.DropDownList("Term", null, htmlAttributes: new { @class = "form-control" })
+                                <span asp-validation-for="Term" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <table class="responsive">
+                <tr>
+                    <td>
+                        <div class="search-form-group">
+                            @Html.Label("startDate", "Start Date", htmlAttributes: new { @class = "control-label" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(model => model.SEC_START_DATE, new { id = "startDate", @placeholder = "Start Date", @class = "form-control fdatepicker" })
+                                <span asp-validation-for="SEC_START_DATE" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="search-form-group">
+                            @Html.Label("endDate", "End Date", htmlAttributes: new { @class = "control-label" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(model => model.STATUS_DATE, new { id = "endDate", @placeholder = "End Date", @class = "form-control fdatepicker" })
+                                <span asp-validation-for="STATUS_DATE" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="search-form-group">
+                            @Html.Label("endDate", "End Date", htmlAttributes: new { @class = "control-label" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(model => model.DateScanned, new { id = "dateScanned", @placeholder = "Date Scanned", @class = "form-control fdatepicker" })
+                                <span asp-validation-for="DateScanned" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <table class="responsive">
+                <tr>
+                    <td>
+                        <div class="search-form-group">
+                            <input type="submit" class="button" value="Search" />
+                        </div>
+                    </td>
+                    <td>
+                        <div class="search-form-group">
+                            @Html.Label("SearchResults", "Number of Results to Display", htmlAttributes: new { @class = "form-control" })
+                            <div class="col-md-10">
+                                @Html.DropDownList("SearchResults", null, htmlAttributes: new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+    </form>
+</div>

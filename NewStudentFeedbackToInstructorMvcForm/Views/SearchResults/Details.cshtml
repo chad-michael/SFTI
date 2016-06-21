@@ -1,0 +1,131 @@
+﻿@model NewStudentFeedbackToInstructorMvcForm.Models.View_BatchSearch
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>View_BatchSearch</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SEC_TERM)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SEC_TERM)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SEC_COURSE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SEC_COURSE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SEC_NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SEC_NAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SEC_CURRENT_STATUS)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SEC_CURRENT_STATUS)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CURRENT_STATUS_DESC)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CURRENT_STATUS_DESC)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.STATUS_DATE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.STATUS_DATE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CSF_FACULTY)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CSF_FACULTY)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SEC_START_DATE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SEC_START_DATE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SEC_NO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SEC_NO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DEPARTMENT_1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DEPARTMENT_1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SEC_COURSE_NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SEC_COURSE_NAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LAST_NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LAST_NAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FIRST_NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FIRST_NAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FACULTY_NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FACULTY_NAME)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,42 +1,150 @@
-﻿<!DOCTYPE html>
+﻿
+
+<!DOCTYPE html>
 <html>
 <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=9; IE=EDGE" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    <title>@ViewBag.Title - Student Feedback To Instructor</title>
+
+    <link href="~/Content/bootstrap-theme.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <link href="~/Content/foundation/app.css" rel="stylesheet" />
+    <link href="~/Content/foundation/foundation.css" rel="stylesheet" />
+    <link href="~/Content/CenteredFooter.css" rel="stylesheet" />
+    <link href="~/Content/responsive-tables.css" rel="stylesheet" />
+    <link href="~/Content/foundation/foundation-datepicker.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.3/css/normalize.min.css">
+
+    @*@Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")*@
+
+    @*<link asp-src-include="~/Content/**/*.css" asp-append-version="true" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.3/css/normalize.min.css">*@
+
+    <!-- DataTables -->
+   @**<link href="~/Content/datatables.min.css" rel="stylesheet" />*@
+    @*<link href="~/Content/jquery.dataTables.css" rel="stylesheet" />
+    <link href="~/Content/buttons.dataTables.css" rel="stylesheet" />
+    <link href="~/Content/responsive.dataTables.css" rel="stylesheet" />
+    <link href="~/Content/select.dataTables.css" rel="stylesheet" />*@
+
 </head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
+<body id="main">
+
+    <header id="header" class="header"></header>
+    <div data-sticky-container>
+        <div data-sticky data-margin-top='0' data-top-anchor="header:bottom" data-btm-anchor="content:bottom">
+            <div class="delta-top-bar">
+                <a href="http://www.delta.edu/home.aspx" title="Delta College Home">
+                    <img src="http://www.delta.edu/images/system/redesign/DeltaLogo.png" title="Delta College Home" alt="Delta College logo" />
+                </a>
+                <div class="delta-top-bar-right">
+                    <ul class="menu" data-responsive-menu="drilldown medium-dropdown">
+                        <li class="has-submenu">
+                            <a asp-controller="Home" asp-action="Index">Back to Search Form</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
+    <br />
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+    <div class="delta-container delta-body-content">
+        <div class="delta-content">
+            @RenderBody()
+        </div>
+    </div>
+    
+    @*Centered Footer*@
+    <footer class="footer">
+        <div class="row">
+            <div class="small-12 columns">
+                <p class="slogan">Delta Community College</p>
+                <p class="links">
+                    <a asp-controller="Home" asp-action="Index">Home</a>
+                    <a asp-controller="Home" asp-action="Foundation">Foundation Examples</a>
+                    <a asp-controller="Home" asp-action="About">About</a>
+                    <a asp-controller="Home" asp-action="FAQ">FAQ</a>
+                    <a asp-controller="Home" asp-action="Contact">Contact</a>
+                </p>
+                <p class="copywrite">&copy; @DateTime.Now.Year - Delta College</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="~/Scripts/jquery-2.2.3.js"></script>
+    <script src="~/Scripts/tether.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/foundation/vendor/what-input.js"></script>
+    <script src="~/Scripts/foundation/vendor/foundation.js"></script>
+    <script src="~/Scripts/foundation/app.js"></script>
+    <script src="~/Scripts/foundation/foundation-datepicker.min.js"></script>
+    <script src="~/Scripts/site.js"></script>
+
+    <!-- Data Table -->
+    @*<script src="~/Scripts/datatables.min.js"></script>*@
+    @*<script src="~/Scripts/pdfmake.js"></script>
+    <script src="~/Scripts/vfs_fonts.js"></script>
+    <script src="~/Scripts/jquery.dataTables.js"></script>
+    <script src="~/Scripts/dataTables.buttons.js"></script>
+    <script src="~/Scripts/buttons.colVis.js"></script>
+    <script src="~/Scripts/buttons.flash.js"></script>
+    <script src="~/Scripts/buttons.html5.js"></script>
+    <script src="~/Scripts/buttons.print.js"></script>
+    <script src="~/Scripts/dataTables.responsive.js"></script>
+    <script src="~/Scripts/dataTables.select.js"></script>*@
+
+    @*<script asp-src-include="~/Scripts/**/*.js" asp-append-version="true"></script>*@
+
+    @*@Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")*@
     @RenderSection("scripts", required: false)
+
+    <!-- Data Picker Script -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.fdatepicker').fdatepicker();
+            $('.fdatepicker').each(function () {
+                var date = $(this).val();
+                if (date.length > 0) {
+                    $(this).val(date.split(" ")[0]);
+                }
+            });
+        });
+    </script>
+
+    <!-- Checkboxes Script -->
+    <script type="text/javascript">
+
+        function toggleChecked(status) {
+            $("#checkboxes input").each(function () {
+                // Set the checked status of each to match the
+                // checked status of the check all checkbox:
+                $(this).prop("checked", status);
+            });
+        }
+
+        $(document).ready(function () {
+
+            // Grab a reference to the check all box:
+            var checkAllBox = $("#checkall");
+
+            //Set the default value of the global checkbox to true:
+            checkAllBox.prop('checked', false);
+
+            // Attach the call to toggleChecked to the
+            // click event of the global checkbox:
+            checkAllBox.click(function () {
+                var status = checkAllBox.prop('checked');
+                toggleChecked(status);
+            });
+        });
+    </script>
+
 </body>
 </html>

@@ -1,24 +1,104 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+﻿
+.header {
+  background: url(http://www.delta.edu/images/system/redesign/headerbg.png) center center repeat;
+  background-color: #04573B;
+  background-size: cover;
 }
 
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+[data-sticky] {
+  width: 100%;
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
-.dl-horizontal dt {
-    white-space: normal;
+.delta-top-bar {
+  padding: 2rem;
+  transition: padding .25s ease;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+.is-stuck .delta-top-bar {
+  padding: 1rem;
+  transition: padding .25s ease;
 }
+
+.delta-top-bar::before, .top-bar::after {
+    content: ' ';
+    display: table; 
+}
+
+.delta-top-bar::after {
+    clear: both; 
+}
+
+.delta-top-bar,
+.delta-top-bar ul {
+    background-color: #04573B; 
+}
+
+.delta-top-bar a {
+    color: #fff; 
+}
+
+.delta-top-bar ul li a {
+        color: #fff; 
+}
+
+.delta-top-bar input {
+    width: 200px;
+    margin-right: 1rem; 
+}
+
+.delta-top-bar input.button {
+    width: auto; 
+}
+
+.delta-top-bar-left {
+    float: left; 
+}
+
+.delta-top-bar-right {
+    float: right; 
+}
+
+.dropdown.menu .submenu {
+  border: none; 
+  background-color: #04573B;
+}
+
+.dropdown.menu .is-dropdown-submenu-parent.is-right-arrow > a::after {
+  border-color: #fff transparent transparent; }
+
+.is-drilldown-submenu-parent > a::after {
+  border-color: transparent transparent transparent #fff; }
+
+.js-drilldown-back::before {
+  border-color: transparent #fff transparent transparent; }
+
+/*Search Results Row*/
+.row-search {
+  margin-top: 5rem;
+  margin-left: auto;
+  margin-right: auto; }
+  .row-search::before, .row-search::after {
+    content: ' ';
+    display: table; }
+  .row-search::after {
+    clear: both; }
+  .row-search.collapse > .column, .row-search.collapse > .columns {
+    padding-left: 0;
+    padding-right: 0; }
+  .row-search .row {
+    max-width: none;
+    margin-left: -0.625rem;
+    margin-right: -0.625rem;
+    max-width: none; }
+    @media screen and (min-width: 40em) {
+      .row-search .row {
+        margin-left: -0.9375rem;
+        margin-right: -0.9375rem; } }
+    .row-search .row-search.collapse {
+      margin-left: 0;
+      margin-right: 0; }
+  .row-search.expanded {
+    max-width: none; }
+    .row-search.expanded .row-search {
+      margin-left: auto;
+      margin-right: auto; }

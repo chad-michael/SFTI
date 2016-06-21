@@ -1,0 +1,318 @@
+﻿@model PagedList.IPagedList<NewStudentFeedbackToInstructorMvcForm.Models.View_BatchSearch>
+
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">*@
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<style type="text/css" class="init">
+    .bs-example {
+        margin: 20px;
+    }
+
+    #events {
+        margin-bottom: 1em;
+        padding: 1em;
+        background-color: #f6f6f6;
+        border: 1px solid #999;
+        border-radius: 3px;
+        height: 100px;
+        overflow: auto;
+    }
+</style>
+
+<p></p>
+<p></p>
+
+<div class="row-search">
+    <div class="column" row id="content">
+        <p><strong>Please note: Use of this application is subject to the <a target="_blank" href="http://www3.delta.edu/AUG.asp">Delta College Acceptable Use Guidelines</a>.</strong></p>
+
+        <h2 class="text-center">Search Results</h2>
+
+        <link rel="stylesheet" type="text/css" href="/Content/font-awesome.min.css" />
+            <div style="text-align:center">
+                <button id="exportButton" class="btn btn-lg btn-danger clearfix"><span class="fa fa-file-excel-o"></span> Export to Excel</button>
+                <button id="exportPDFButton" class="btn btn-lg btn-danger clearfix"><span class="fa fa-file-excel-o"></span> Export to PDF</button>
+                <button id="exportButton" class="btn btn-lg btn-danger clearfix disabled"><span class="fa fa-file-excel-o"></span> Single Page</button>
+                <button id="exportButton" class="btn btn-lg btn-danger clearfix disabled"><span class="fa fa-file-excel-o"></span> Muli Page</button>
+                <button id="exportButton" class="btn btn-lg btn-danger clearfix disabled"><span class="fa fa-file-excel-o"></span> Raw</button>
+                <button id="exportButton" class="btn btn-lg btn-danger clearfix disabled"><span class="fa fa-file-excel-o"></span> Recap</button>
+            </div>
+        <br />
+
+    <table id="exportTable" class="table table-hover responsive">
+        <thead>
+        <tr>
+            <th style="text-align: center">Add to Selected</th>
+            <th>@Html.DisplayNameFor(model => model.First().BatchID)</th> <!-- Batch ID -->
+            <th>@Html.DisplayNameFor(model => model.First().DateScanned)</th> <!-- Date Scanned -->
+            <th>@Html.DisplayNameFor(model => model.First().CSF_FACULTY)</th> <!-- Faculty ID -->
+            <th>@Html.DisplayNameFor(model => model.First().FACULTY_NAME)</th> <!-- Faculty Name -->
+            <th>@Html.DisplayNameFor(model => model.First().Term)</th> <!-- Term -->
+            <th></th> <!-- Details | Delete -->
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td style="text-align: center" id="checkboxes">@Html.CheckBox("checked", false, new { value=item.BatchID })</td>
+                <td>@Html.DisplayFor(modelItem => item.BatchID)</td>
+                <td>@Html.DisplayFor(modelItem => item.DateScanned)</td>
+                <td>@Html.DisplayFor(modelItem => item.CSF_FACULTY)</td>
+                <td>@Html.DisplayFor(modelItem => item.FACULTY_NAME)</td>
+                <td>@Html.DisplayFor(modelItem => item.Term)</td>
+                <td>
+                    <!-- TODO: Add logic for (HttpContext.Current.User.IsInRole("Staff_OIT")) -->
+                    @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |*@
+                    @Html.ActionLink("Details", "Details", new {id = item.BatchID}) |
+                    @Html.ActionLink("Delete", "Delete", new {id = item.BatchID})
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+
+    <!-- you need to include the shieldui css and js assets in order for the components to work -->
+        <link rel="stylesheet" type="text/css" href="http://www.shieldui.com/shared/components/latest/css/light/all.min.css" />
+        <script type="text/javascript" src="http://www.shieldui.com/shared/components/latest/js/shieldui-all.min.js"></script>
+        <script type="text/javascript" src="http://www.shieldui.com/shared/components/latest/js/jszip.min.js"></script>
+        <script type="text/javascript">
+
+            //Export to Excel jQuery
+            jQuery(function($) {
+                $("#exportButton")
+                    .click(function() {
+                        // parse the HTML table element having an id=exportTable
+                        var dataSource = shield.DataSource.create({
+                            data: "#exportTable",
+                            schema: {
+                                type: "table",
+                                fields: {
+                                    Name: { type: String },
+                                    Age: { type: Number },
+                                    Email: { type: String }
+                                }
+                            }
+                        });
+
+                        // when parsing is done, export the data to Excel
+                        dataSource.read()
+                            .then(function(data) {
+                                new shield.exp.OOXMLWorkbook({
+                                    author: "Delta",
+                                    worksheets: [
+                                        {
+                                            name: "PrepBootstrap Table",
+                                            rows: [
+                                                {
+                                                    cells: [
+                                                        {
+                                                            style: {
+                                                                bold: true
+                                                            },
+                                                            type: String,
+                                                            value: "Name"
+                                                        },
+                                                        {
+                                                            style: {
+                                                                bold: true
+                                                            },
+                                                            type: String,
+                                                            value: "Age"
+                                                        },
+                                                        {
+                                                            style: {
+                                                                bold: true
+                                                            },
+                                                            type: String,
+                                                            value: "Email"
+                                                        }
+                                                    ]
+                                                }
+                                            ].concat($.map(data,
+                                                function(item) {
+                                                    return {
+                                                        cells: [
+                                                            { type: String, value: item.Name },
+                                                            { type: Number, value: item.Age },
+                                                            { type: String, value: item.Email }
+                                                        ]
+                                                    };
+                                                }))
+                                        }
+                                    ]
+                                }).saveAs({
+                                    fileName: "SearchResultsExcel"
+                                });
+                            });
+                    });
+            });
+
+            //Export to PDF jQuery
+            jQuery(function($) {
+                $("#exportPDFButton")
+                    .click(function() {
+                        // parse the HTML table element having an id=exportTable
+                        var dataSource = shield.DataSource.create({
+                            data: "#exportTable",
+                            schema: {
+                                type: "table",
+                                fields: {
+                                    Name: { type: String },
+                                    Age: { type: Number },
+                                    Email: { type: String }
+                                }
+                            }
+                        });
+
+                        // when parsing is done, export the data to PDF
+                        dataSource.read()
+                            .then(function(data) {
+                                var pdf = new shield.exp.PDFDocument({
+                                    author: "Delta",
+                                    created: new Date()
+                                });
+
+                                pdf.addPage("a4", "portrait");
+
+                                pdf.table(
+                                    50,
+                                    50,
+                                    data,
+                                    [
+                                        { field: "Name", title: "Person Name", width: 200 },
+                                        { field: "Age", title: "Age", width: 50 },
+                                        { field: "Email", title: "Email Address", width: 200 }
+                                    ],
+                                    {
+                                        margins: {
+                                            top: 50,
+                                            left: 50
+                                        }
+                                    }
+                                );
+
+                                pdf.saveAs({
+                                    fileName: "SearchResultsPDF"
+                                });
+                            });
+                    });
+            });
+        </script>
+        <style>
+            #exportButton {
+                border-radius: 0;
+            }
+            #exportPDFButton {
+                border-radius: 0;
+            }
+        </style>
+    <a href='#' onclick='GetListOfCheckedBatchIds();'>Add Checked to Selection</a>
+
+
+
+
+    @*@Html.ActionLink("Add Checked to Selection", "AddChecked", null, htmlAttributes: new { id="btnAddChecked" })*@
+
+
+    @*<input type="button" value="Add Checked to Selection" class="btn btn-large btn-primary" id="btnAddChecked" /><br />*@
+
+        @*<input type="button" value="Add Checked to Selection" class="btn btn-large btn-primary" id="btnAddChecked" /><br />*@
+        @*<button id="addCheckedToSelection" class="btn btn-lg btn-danger clearfix">Add Checked to Selection</button>*@
+        @*<button id="exportButton" class="btn btn-lg btn-danger clearfix"><span class="fa fa-file-excel-o"></span> Export to Excel</button>*@
+        <div>
+            <input type="checkbox" id="checkall" />
+            <label for="checkall" class="checkbox">Check All</label>
+        </div><br />
+        <div class="bs-example">
+    <!-- Button HTML (to Trigger Modal) -->
+    <a href="#myModal" role="button" class="btn btn-large btn-primary" data-toggle="modal">Email Results</a>
+
+    <!-- Email Modal -->
+    <div id="myModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Email Output</h4>
+                </div>
+                <div class="modal-body">
+                    <table>
+                        <tr>
+                            <td>@Html.TextBox("personToAdd")</td>
+                            <td>
+                                <button type="button" class="btn btn-default">Add Recipient</button>
+                                <button type="button" class="btn btn-default">Remove Selected Recipient(s)</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Recipients:</td>
+                            <td>@Html.TextBox("recipients")</td>
+                        </tr>
+                        <tr>
+                            <td>Subject:
+                            </td>
+                            <td>@Html.TextBox("subject")</td>
+                        </tr>
+                        <tr>
+                            <td>Message:</td>
+                            <td>@Html.TextArea("message")</td>
+                        </tr>
+                    </table>
+                    <p class="text-warning"><small>Email Results - it's fun!</small></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Email Output</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+</div>
+
+    </div>
+</div>
+
+<br />
+<br />
+<div class="page-info" style="text-align: center">
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("Index", new {page, orderBy = ViewBag.OrderBy}))
+</div>
+
+<script type='text/javascript'>
+
+    function GetListOfCheckedBatchIds() {
+
+        var selectedBatchIds = [];
+        $("input:checked").each(function(index) {
+            var checkedBatchId = $(this).val();
+            selectedBatchIds.push(checkedBatchId);
+        });
+
+        jQuery.ajax({
+            type: "POST",
+            url: "@Url.Action("AddChecked")",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ batchIds: selectedBatchIds }),
+            success: function (data) {
+                alert(data);
+            },
+            failure: function (errMsg) {
+                alert(errMsg);
+            }
+        });
+    }
+</script>
+

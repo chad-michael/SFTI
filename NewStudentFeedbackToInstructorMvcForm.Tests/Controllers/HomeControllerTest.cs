@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NewStudentFeedbackToInstructorMvcForm;
 using NewStudentFeedbackToInstructorMvcForm.Controllers;
+using NewStudentFeedbackToInstructorMvcForm.Models;
 
 namespace NewStudentFeedbackToInstructorMvcForm.Tests.Controllers
 {
@@ -15,40 +16,19 @@ namespace NewStudentFeedbackToInstructorMvcForm.Tests.Controllers
         [TestMethod]
         public void Index()
         {
-            // Arrange
-            HomeController controller = new HomeController();
+            //// Arrange
+            //HomeController controller = new HomeController();
 
-            // Act
-            ViewResult result = controller.Index() as ViewResult;
+            //// Act
+            //var orderBy = "";
+            //var searchString = "";
+            //var searchField = "";
+            //int? page = 1;
+            //View_BatchSearch viewBatch = new View_BatchSearch();
+            //ViewResult result = controller.Index(page) as ViewResult;
 
-            // Assert
-            Assert.IsNotNull(result);
-        }
-
-        [TestMethod]
-        public void About()
-        {
-            // Arrange
-            HomeController controller = new HomeController();
-
-            // Act
-            ViewResult result = controller.About() as ViewResult;
-
-            // Assert
-            Assert.AreEqual("Your application description page.", result.ViewBag.Message);
-        }
-
-        [TestMethod]
-        public void Contact()
-        {
-            // Arrange
-            HomeController controller = new HomeController();
-
-            // Act
-            ViewResult result = controller.Contact() as ViewResult;
-
-            // Assert
-            Assert.IsNotNull(result);
+            //// Assert
+            //Assert.IsNotNull(result);
         }
     }
 }
